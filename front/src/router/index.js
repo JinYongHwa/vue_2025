@@ -2,10 +2,15 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Write from "../views/Write.vue"
 import View from "../views/View.vue"
+import Modify from "../views/Modify.vue"
 const routes = [
   {
     path:"/write",
     component:Write
+  },
+  {
+    path:"/modify/:no",
+    component:Modify
   },
   {
     path:"/view/:no",

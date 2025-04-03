@@ -60,10 +60,36 @@ router.get("/api/article/:no",async function(req,res){
 })
 
 router.post("/api/articles",async function(req,res){
-  var list=await Article.findAll()
+  var page=req.body.page
+  if(!page){
+    page=1
+  }
+  var offset=(page-1)*10
+  var list=await Article.findAll({
+    order:[
+      ["no","DESC"],
+      ["writeTime","DESC"]
+    ],
+    limit:10,
+    offset:offset
+  })
+  var count=await Article.count()
   res.json({
     success:true,
-    list:list
+    list:list,
+    count:count
+  })
+})
+
+router.delete("/api/article/:id",async function(req,res){
+  var id=req.params.id
+  await Article.destroy({
+    where:{
+      no:id
+    }
+  })
+  res.json({
+    success:true
   })
 })
 

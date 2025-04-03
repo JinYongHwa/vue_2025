@@ -3,6 +3,12 @@
         <div class="title">{{ article.title }}</div>
         <div class="writer-name">{{ article.writerName }}</div>
         <div class="body">{{ article.body }}</div>
+
+        <div class="text-center mt-2">
+            <v-btn to="/">목록</v-btn>
+            <v-btn class="ml-2 mr-2" @click="moveModify()">수정</v-btn>
+            <v-btn color="error" @click="remove()">삭제</v-btn>
+        </div>
     </v-container>
 </template>
 <script>
@@ -30,11 +36,24 @@ export default{
                 this.article=response.data.article
             }
             
+        },
+        async remove(){
+            if(!window.confirm("정말삭제하겠습니까?")){
+                return
+            }
+            //정말삭제하겠습니까? 예누름 =>삭제 로직
+            var response=await this.$axios.delete("/api/article/"+this.$route.params.no)
+            if(response.data.success){      //삭제성공시
+                this.$router.push("/")
+            }
+        },
+        moveModify(){
+            this.$router.push("/modify/"+this.$route.params.no)
         }
     }
 }
 </script>
-<style lang="less">
+<style scoped lang="less">
 @color: #0000ff;
 
 .title{

@@ -52,6 +52,10 @@ router.get("/api/article/:no",async function(req,res){
       no:no
     }
   })
+  //조회수를 1 올림
+  article.hits++
+  await article.save()    //1 올린 조회수를 데이터베이스에 저장
+
   res.json({
     success:true,
     article:article
@@ -92,6 +96,24 @@ router.delete("/api/article/:id",async function(req,res){
     success:true
   })
 })
+//글 수정 api
+router.post("/api/article/modify",async function(req,res){
+  var article=req.body    //front 에서 보내온 수정될글
 
+  await Article.update({ //수정될 필드 입력력
+    title:article.title,
+    body:article.body,
+    writerName:article.writerName
+  },{
+    //수정될 글의 조건
+    where :{
+      no : article.no
+    }
+  })
+  //front 에 완료되었다고 응답
+  res.json({
+    success:true
+  })
+})
 
 module.exports = router;

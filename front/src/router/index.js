@@ -3,7 +3,19 @@ import HomeView from '../views/HomeView.vue'
 import Write from "../views/Write.vue"
 import View from "../views/View.vue"
 import Modify from "../views/Modify.vue"
+
+import Join from "../views/Join.vue"
+import Login from "../views/Login.vue"
+
 const routes = [
+  {
+    path:"/login",
+    component:Login
+  },
+  {
+    path:"/join",
+    component:Join
+  },
   {
     path:"/write",
     component:Write

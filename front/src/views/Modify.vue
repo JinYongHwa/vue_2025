@@ -28,6 +28,12 @@ export default{
             if(response.data.success){
                 this.article=response.data.article
             }
+        },
+        async modify(){
+            var response=await this.$axios.post("/api/article/modify",this.article)
+            if(response.data.success){  //수정완료시
+                this.$router.replace("/view/"+this.$route.params.no)
+            }
         }
     }
 }

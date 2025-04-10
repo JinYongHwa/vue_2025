@@ -20,7 +20,31 @@ function define(connection){
         writeTime:{
             type:Sequelize.DATE,
             defaultValue:Sequelize.NOW
+        },
+        hits:{
+            type:Sequelize.INTEGER,
+            defaultValue:0
         }
+    })
+
+    global.User=connection.define("User",{
+        id:{
+            type:Sequelize.STRING(30),
+            primaryKey:true,
+            allowNull:false
+        },
+        name:{
+            type:Sequelize.STRING(30)
+        },
+        password:{
+            type:Sequelize.STRING(200),
+            allowNull:false
+        },
+        joinDate:{
+            type:Sequelize.DATE,
+            defaultValue:Sequelize.NOW
+        }
+
     })
 
     connection.sync({

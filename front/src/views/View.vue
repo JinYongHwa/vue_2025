@@ -1,8 +1,10 @@
 <template>
     <v-container>
         <div class="title">{{ article.title }}</div>
+        <div class="hits">조회수 {{ article.hits }}</div>
         <div class="writer-name">{{ article.writerName }}</div>
         <div class="body">{{ article.body }}</div>
+
 
         <div class="text-center mt-2">
             <v-btn to="/">목록</v-btn>

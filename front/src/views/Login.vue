@@ -24,6 +24,7 @@ export default{
         async login(){
             var response=await this.$axios.post("/api/user/login",this.user)
             if(response.data.success){
+                this.$store.commit("login",response.data.user)
                 //로그인 완료시
                 this.$router.push("/")
             }

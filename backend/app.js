@@ -12,12 +12,36 @@ var connection= new Sequelize("blog","root","mjc803",{
 var define=require("./model.js")
 define(connection)
 
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
+
+const options = {
+	host: 'localhost',
+	port: 3306,
+	user: 'root',
+	password: 'mjc803',
+	database: 'blog'
+};
+
+const sessionStore = new MySQLStore(options);
+
+
+
+
 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+app.use(session({
+	key: 'login_session_id',
+	secret: 'mjcmjc123!!!@@@###',
+	store: sessionStore,
+	resave: false,
+	saveUninitialized: false
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
